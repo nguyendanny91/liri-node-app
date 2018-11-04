@@ -49,6 +49,5 @@ NOTE: If user selects "What you want" then the application will run the text in 
 <img width="835" alt="screenshot4" src="https://user-images.githubusercontent.com/41662459/47960786-543e9280-dfbd-11e8-9e80-53abe6e95e43.png">
 
 5. See full demo video here
-```
-https://drive.google.com/file/d/1-VyH_3pF2S0SVpUmLkeDJSHmY4hfvdFM/view
-```
+
+[![IMAGE ALT TEXT HERE](https://user-images.githubusercontent.com/41662459/47961097-1fccd580-dfc1-11e8-98e2-4785d70acb2b.png)](https://drive.google.com/file/d/1-VyH_3pF2S0SVpUmLkeDJSHmY4hfvdFM/view)
