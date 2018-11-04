@@ -23,9 +23,11 @@ In this repository I created a LIRI. LIRI is like iPhone's SIRI. However, while 
   4. node-spotify-api
   5. request
 
-## Example/How-To
+## Examples
 
-1. Execute 
+1. Execute Application
+```
+node liri.js
 ```
 <img width="453" alt="example1" src="https://user-images.githubusercontent.com/41662459/47960692-f65d7b00-dfbb-11e8-9174-478b0713936c.png">
-```
+
