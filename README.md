@@ -27,5 +27,5 @@ In this repository I created a LIRI. LIRI is like iPhone's SIRI. However, while 
 
 1. Execute 
 ```
-Give examples
+<img width="453" alt="example1" src="https://user-images.githubusercontent.com/41662459/47960692-f65d7b00-dfbb-11e8-9174-478b0713936c.png">
 ```
