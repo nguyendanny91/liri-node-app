@@ -6,6 +6,9 @@ var request = require("request");
 var moment = require('moment');
 var fs = require("fs");
 var inquirer = require("inquirer");
+var filename = "log.txt"
+
+var displayName = ''
  
 var spotify = new Spotify({
   id: spotify.spotify.id,
@@ -28,13 +31,18 @@ command === 'spotify-this-song' ?
         return console.log('Error occurred: ' + err);
     }
     
-    console.log("Artist: " + data.tracks.items[0].album.artists[0].name); // multiple artists e.g. finesse?
+    displayName = 
+        "Artist: " + data.tracks.items[0].album.artists[0].name + "\n" +
 
-    console.log("Song Name: " + data.tracks.items[0].name) // song name
+        "Song Name: " + data.tracks.items[0].name + "\n" +
 
-    console.log("Album Name: " + data.tracks.items[0].album.name) //album name
+        "Album Name: " + data.tracks.items[0].album.name + "\n" +
 
-    console.log("Preview Link: " + data.tracks.items[0].preview_url) //preview url
+        "Preview Link: " + data.tracks.items[0].preview_url;
+
+    console.log(displayName);
+
+    logfile(displayName)
 
     })) :
 
@@ -46,14 +54,18 @@ command === 'concert-this' ?
     if (!error && response.statusCode === 200) {
 
         var artists = JSON.parse(body)
-
-        console.log("Name of Venue: " + artists[0].venue.name)
-
-        console.log("Country/City: " + artists[0].venue.country + "/" + artists[0].venue.city)
-
         var artistDateRaw = artists[0].datetime
 
-            console.log("Date of Event: " + moment(artistDateRaw).format("MM/DD/YYYY")) 
+        displayName = 
+            "Name of Venue: " + artists[0].venue.name + "\n" +
+
+            "Country/City: " + artists[0].venue.country + "/" + artists[0].venue.city + "\n" +
+
+            "Date of Event: " + moment(artistDateRaw).format("MM/DD/YYYY");
+
+    console.log(displayName);
+
+    logfile(displayName)
     }
     }) :
 
@@ -66,14 +78,19 @@ command === 'movie-this' ?
 
         var response = JSON.parse(body)
 
-        console.log("Movie Title: " + response.Title);
-        console.log("Movie Year Release: " + response.Year);
-        console.log("IMDB Rating: " + response.imdbRating);
-        console.log("Rotten Tomatoes Rating: " + response.Ratings[1].Value);
-        console.log("Country: " + response.Country);
-        console.log("Lanaguage: " + response.Language);
-        console.log("Movie Plot: " + response.Plot);
-        console.log("Cast: " + response.Actors);
+        displayName = 
+            "Movie Title: " + response.Title + "\n" +
+            "Movie Year Release: " + response.Year + "\n" +
+            "IMDB Rating: " + response.imdbRating + "\n" +
+            "Rotten Tomatoes Rating: " + response.Ratings[1].Value + "\n" +
+            "Country: " + response.Country + "\n" +
+            "Lanaguage: " + response.Language + "\n" +
+            "Movie Plot: " + response.Plot + "\n" +
+            "Cast: " + response.Actors;
+
+        console.log(displayName);
+
+        logfile(displayName)
     }
     }) :
 
@@ -133,5 +150,24 @@ inquirer.prompt([
 
 
 })
+
+function logfile(text) {
+
+    text = text + "\n" + "------------------------" + "\n" ;
+
+    fs.appendFile(filename, text, function(err) {
+
+        // If an error was experienced we will log it.
+        if (err) {
+        console.log(err);
+        }
+    
+        // If no error is experienced, we'll log the phrase "Content Added" to our node console.
+        else {
+        console.log("Content Logged!");
+        }
+    
+    });
+}
 
 
