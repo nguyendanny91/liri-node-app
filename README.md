@@ -1,9 +1,9 @@
 # liri-node-app
 
-# Overview
+## Overview
 In this repository I created a LIRI. LIRI is like iPhone's SIRI. However, while SIRI is a Speech Interpretation and Recognition Interface, LIRI is a Language Interpretation and Recognition Interface. LIRI will be a command line node app that takes in parameters and gives you back data.
 
-# Capabilities
+## Capabilities
 * The application has the following search capabilities:
     1. Song - Details regarding a song a user is searching
     2. Venue - Upcoming shows for an artist(s)/performer
@@ -11,7 +11,7 @@ In this repository I created a LIRI. LIRI is like iPhone's SIRI. However, while 
 * Application has a command line interface
 * The application logs system responses into "log.txt" file
 
-# Components
+## Components
 * API
   1. Spotify API
   2. BandsinTown API
@@ -23,5 +23,9 @@ In this repository I created a LIRI. LIRI is like iPhone's SIRI. However, while 
   4. node-spotify-api
   5. request
 
-# Example
+## Example/How-To
 
+1. Execute 
+```
+Give examples
+```
