@@ -12,36 +12,15 @@ var spotify = new Spotify({
   secret: spotify.spotify.secret
 });
 
-var command = process.argv[2]
-var search = process.argv.slice(3).join(" ");
+var command = '';
 
 
-command === 'do-what-it-says' ?
-
-    fs.readFile("random.txt", "utf8", function(error, data) {
-        if (error) {
-            return console.log(error);
-        }
-
-        console.log(data);
-
-        var dataArr = data.split(",");
-
-        command = dataArr[0]
-        search = dataArr[1].replace(/"/g, "")        
-
-        liriLogic()
-        }) :
-
-        liriLogic()
-
-
-function liriLogic() {
+function liriLogic(search,command) {
 command === 'spotify-this-song' ?
 
     ((search == '' ? search ='The Sign Ace of Base' :
         search) 
-    
+
     ,
 
     spotify.search({ type: 'track', query: search, limit: 1 }, function(err, data) {
@@ -49,14 +28,13 @@ command === 'spotify-this-song' ?
         return console.log('Error occurred: ' + err);
     }
     
-    console.log(data.tracks.items[0].album.artists[0].name); // multiple artists e.g. finesse?
+    console.log("Artist: " + data.tracks.items[0].album.artists[0].name); // multiple artists e.g. finesse?
 
-    console.log(data.tracks.items[0].name) // song name
+    console.log("Song Name: " + data.tracks.items[0].name) // song name
 
+    console.log("Album Name: " + data.tracks.items[0].album.name) //album name
 
-    console.log(data.tracks.items[0].album.name) //album name
-
-    console.log(data.tracks.items[0].preview_url) //preview url
+    console.log("Preview Link: " + data.tracks.items[0].preview_url) //preview url
 
     })) :
 
@@ -69,15 +47,13 @@ command === 'concert-this' ?
 
         var artists = JSON.parse(body)
 
-        console.log(artists[0].venue.name)
+        console.log("Name of Venue: " + artists[0].venue.name)
 
-        console.log(artists[0].venue.country)
-
-        console.log(artists[0].venue.city)
+        console.log("Country/City: " + artists[0].venue.country + "/" + artists[0].venue.city)
 
         var artistDateRaw = artists[0].datetime
 
-            console.log(moment(artistDateRaw).format("MM/DD/YYYY")) 
+            console.log("Date of Event: " + moment(artistDateRaw).format("MM/DD/YYYY")) 
     }
     }) :
 
@@ -88,9 +64,16 @@ command === 'movie-this' ?
     // If the request is successful (i.e. if the response status code is 200)
     if (!error && response.statusCode === 200) {
 
-        // Parse the body of the site and recover just the imdbRating
-        // (Note: The syntax below for parsing isn't obvious. Just spend a few moments dissecting it).
-        console.log(JSON.parse(body));
+        var response = JSON.parse(body)
+
+        console.log("Movie Title: " + response.Title);
+        console.log("Movie Year Release: " + response.Year);
+        console.log("IMDB Rating: " + response.imdbRating);
+        console.log("Rotten Tomatoes Rating: " + response.Ratings[1].Value);
+        console.log("Country: " + response.Country);
+        console.log("Lanaguage: " + response.Language);
+        console.log("Movie Plot: " + response.Plot);
+        console.log("Cast: " + response.Actors);
     }
     }) :
 
@@ -120,19 +103,33 @@ inquirer.prompt([
 
         null;
 
-    command === 'do-what-it-says' ? 
-        
-    console.log("insert default logic") :
+    command != 'do-what-it-says' ?
 
-    inquirer.prompt([
-    {
-        type: "input",
-        name: "search",
-        message: "Please enter details of selection"
-    }
-    ]).then(function(user) {
-    console.log(user.search)
-    });
+        inquirer.prompt([
+        {
+            type: "input",
+            name: "search",
+            message: "Please enter details of selection"
+        }
+        ]).then(function(user) {
+        console.log(user.search)
+
+        liriLogic(user.search,command)
+        }) :
+    
+        fs.readFile("random.txt", "utf8", function(error, data) {
+        if (error) {
+            return console.log(error);
+        }
+
+        var dataArr = data.split(",");
+
+        command = dataArr[0]
+        search = dataArr[1].replace(/"/g, "")      
+
+        liriLogic(search,command)
+
+    })
 
 
 })
