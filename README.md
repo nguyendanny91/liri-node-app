@@ -47,3 +47,8 @@ NOTE: If user selects "What you want" then the application will run the text in 
 
 4. Repeat steps 1-3 and view log.txt file
 <img width="835" alt="screenshot4" src="https://user-images.githubusercontent.com/41662459/47960786-543e9280-dfbd-11e8-9e80-53abe6e95e43.png">
+
+5. See full demo video here
+```
+https://drive.google.com/file/d/1-VyH_3pF2S0SVpUmLkeDJSHmY4hfvdFM/view
+```
